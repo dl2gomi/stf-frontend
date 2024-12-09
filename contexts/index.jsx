@@ -2,7 +2,7 @@
 
 import { createAppKit } from '@reown/appkit/react';
 import { EthersAdapter } from '@reown/appkit-adapter-ethers';
-import { mainnet, defineChain } from '@reown/appkit/networks';
+import { mainnet, defineChain, sepolia } from '@reown/appkit/networks';
 
 const projectId = process.env['NEXT_PUBLIC_REOWN_PROJECT_ID'];
 if (!projectId) {
@@ -31,8 +31,8 @@ const hardhat = defineChain({
 createAppKit({
   adapters: [ethersAdapter],
   projectId,
-  networks: [hardhat],
-  defaultNetwork: hardhat,
+  networks: [hardhat, sepolia, mainnet],
+  defaultNetwork: sepolia,
   metadata: {
     name: 'Santistef: connect wallet',
     description: 'Connect wallet to Santistef investment platform',
