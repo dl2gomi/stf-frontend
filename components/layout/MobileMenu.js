@@ -199,16 +199,16 @@ export default function MobileMenu() {
               </Link>
             </li>
           )}
-          <li className="menu-item">
+          {/* <li className="menu-item">
             <Link className="item-menu-mobile" href="/buildings">
               Buildings
             </Link>
-          </li>
-          <li className="menu-item">
+          </li> */}
+          {/* <li className="menu-item">
             <Link className="item-menu-mobile" href="/details">
               Details
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </>
