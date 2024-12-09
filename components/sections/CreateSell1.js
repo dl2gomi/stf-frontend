@@ -61,7 +61,7 @@ export default function CreateSell1() {
                   <p>Step 2</p>
                 </div>
                 <h4 className="heading">
-                  <Link href="/taxes">Hold the STF tokens</Link>
+                  <Link href="/rewards">Hold the STF tokens</Link>
                 </h4>
                 <p className="content">Keep the STF tokens in your wallet to get the shared profit when available.</p>
                 <div className="arrow">
@@ -105,7 +105,7 @@ export default function CreateSell1() {
                   <p>Step 3</p>
                 </div>
                 <h4 className="heading">
-                  <Link href="/taxes">See tax documents</Link>
+                  <Link href="/rewards">See tax documents</Link>
                 </h4>
                 <p className="content">
                   See the tax documents when operators upload them and publicize the company's profit during the period.

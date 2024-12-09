@@ -19,7 +19,7 @@ export default function Footer1() {
                     </Link>
                   </div>
                 </div>
-                <div className="widget widget-menu style-1">
+                {/* <div className="widget widget-menu style-1">
                   <h5 className="title-widget">Marketplace</h5>
                   <ul>
                     <li>
@@ -41,8 +41,8 @@ export default function Footer1() {
                       <Link href="#">Music</Link>
                     </li>
                   </ul>
-                </div>
-                <div className="widget widget-menu style-2">
+                </div> */}
+                {/* <div className="widget widget-menu style-2">
                   <h5 className="title-widget">Resource</h5>
                   <ul>
                     <li>
@@ -64,8 +64,8 @@ export default function Footer1() {
                       <Link href="#">Discover</Link>
                     </li>
                   </ul>
-                </div>
-                <div className="widget widget-menu style-3">
+                </div> */}
+                {/* <div className="widget widget-menu style-3">
                   <h5 className="title-widget">Account</h5>
                   <ul>
                     <li>
@@ -87,8 +87,8 @@ export default function Footer1() {
                       <Link href="#">Create Collection</Link>
                     </li>
                   </ul>
-                </div>
-                <div className="widget-last">
+                </div> */}
+                {/* <div className="widget-last">
                   <div className="widget-menu style-4">
                     <h5 className="title-widget">Company</h5>
                     <ul>
@@ -120,20 +120,20 @@ export default function Footer1() {
                       </li>
                     </ul>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
           <div className="footer-bottom">
             <p>© {new Date().getFullYear()} Santistef International</p>
-            <ul className="flex">
+            {/* <ul className="flex">
               <li>
                 <Link href="#">Privacy Policy</Link>
               </li>
               <li>
                 <Link href="#">Terms of Service</Link>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
       </footer>
