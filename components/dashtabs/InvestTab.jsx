@@ -14,7 +14,7 @@ import invest from '@/pages/invest';
 
 export default function InvestTab() {
   const { address, isConnected } = useAppKitAccount();
-  const { contract: vaultContract, getRole, getTokenPrice, invest } = useVault();
+  const { contract: vaultContract, getRole, getTokenPrice, invest, isStarted } = useVault();
   const { contract: tokenContract, getTotalSupply, getBalance, getDecimals } = useToken();
   const {
     contract: usdtContract,
@@ -150,6 +150,12 @@ export default function InvestTab() {
 
                       if ((await getUSDTBalance(address)) < parseUnits(amount, await getUSDTDecimals())) {
                         Toaster.warning('You have insufficient funds.');
+                        return;
+                      }
+
+                      // check if started
+                      if (!(await isStarted())) {
+                        Toaster.error('Investment not started yet.');
                         return;
                       }
 
