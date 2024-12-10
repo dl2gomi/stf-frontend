@@ -49,7 +49,7 @@ export default function UsersTab() {
   return (
     <>
       <div className="wrapper-content">
-        <div className="inner-content">
+        <div className="inner-content" style={{ maxWidth: '100%', minHeight: '90vh' }}>
           <div className="heading-section">
             <h2 className="tf-title pb-30">Manage Users</h2>
           </div>
@@ -167,7 +167,7 @@ export default function UsersTab() {
             </div>
           </div>
         </div>
-        <div className="side-bar">
+        {/* <div className="side-bar">
           <div className="widget widget-recently">
             <h5 className="title-widget">Recently added</h5>
             <div className="card-small-main">
@@ -416,7 +416,7 @@ export default function UsersTab() {
               <span className="time">16hr ago</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

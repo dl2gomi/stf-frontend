@@ -65,7 +65,7 @@ export default function InvestTab() {
   return (
     <>
       <div className="wrapper-content">
-        <div className="inner-content">
+        <div className="inner-content" style={{ maxWidth: '100%', minHeight: '90vh' }}>
           <div className="heading-section">
             <h2 className="tf-title pb-30">Invest</h2>
           </div>

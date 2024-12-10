@@ -66,129 +66,130 @@ export default function TitileSlider1() {
         <SwiperSlide>
           <div className="tf-card-box">
             <div className="card-media">
-              <Link href="#">
-                <img src="/assets/images/box-item/banner-01.jpg" alt="" />
+              <Link href="/">
+                <img src="/assets/images/box-item/banner (1).jpg" alt="certificate" />
               </Link>
-              <span className="wishlist-button icon-heart" />
-              <div className="featured-countdown">{timerx}</div>
-              <div className="button-place-bid">
-                <a onClick={() => {}} href="#" className="tf-button">
-                  <span>See details</span>
-                </a>
-              </div>
             </div>
             <div className="meta-info text-center">
               <h5 className="name">
-                <Link href="#">Dayco serpentine belt</Link>
+                <Link href="/">Company Certificate</Link>
               </h5>
-              <h6 className="price gem">
-                <i className="icon-gem" />
-                0,34
-              </h6>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="tf-card-box">
             <div className="card-media">
-              <Link href="#">
-                <img src="/assets/images/box-item/banner-02.jpg" alt="" />
+              <Link href="/">
+                <img src="/assets/images/box-item/banner (2).jpg" alt="landscape1" />
               </Link>
-              <span className="wishlist-button icon-heart" />
-              <div className="featured-countdown">{timerx}</div>
-              <div className="button-place-bid">
-                <a onClick={() => {}} href="#" className="tf-button">
-                  <span>See details</span>
-                </a>
-              </div>
             </div>
             <div className="meta-info text-center">
               <h5 className="name">
-                <Link href="#">Dayco serpentine belt</Link>
+                <Link href="/">City Landscape</Link>
               </h5>
-              <h6 className="price gem">
-                <i className="icon-gem" />
-                0,34
-              </h6>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="tf-card-box">
             <div className="card-media">
-              <Link href="#">
-                <img src="/assets/images/box-item/banner-03.jpg" alt="" />
+              <Link href="/">
+                <img src="/assets/images/box-item/banner (3).jpg" alt="landscape2" />
               </Link>
-              <span className="wishlist-button icon-heart" />
-              <div className="featured-countdown">{timerx}</div>
-              <div className="button-place-bid">
-                <a onClick={() => {}} href="#" className="tf-button">
-                  <span>Place Bid</span>
-                </a>
-              </div>
             </div>
             <div className="meta-info text-center">
               <h5 className="name">
-                <Link href="#">Dayco serpentine belt</Link>
+                <Link href="/">Night Sight</Link>
               </h5>
-              <h6 className="price gem">
-                <i className="icon-gem" />
-                0,34
-              </h6>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="tf-card-box">
             <div className="card-media">
-              <Link href="#">
-                <img src="/assets/images/box-item/banner-04.jpg" alt="" />
+              <Link href="/">
+                <img src="/assets/images/box-item/banner (4).jpg" alt="landmark" />
               </Link>
-              <span className="wishlist-button icon-heart" />
-              <div className="featured-countdown">{timerx}</div>
-              <div className="button-place-bid">
-                <a onClick={() => {}} href="#" className="tf-button">
-                  <span>Place Bid</span>
-                </a>
-              </div>
             </div>
             <div className="meta-info text-center">
               <h5 className="name">
-                <Link href="#">Dayco serpentine belt</Link>
+                <Link href="/">City Landmark</Link>
               </h5>
-              <h6 className="price gem">
-                <i className="icon-gem" />
-                0,34
-              </h6>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <div className="tf-card-box">
             <div className="card-media">
-              <Link href="#">
-                <img src="/assets/images/box-item/banner-05.jpg" alt="" />
+              <Link href="/">
+                <img src="/assets/images/box-item/banner (5).jpg" alt="Sunset" />
               </Link>
-              <span className="wishlist-button icon-heart" />
-              <div className="featured-countdown">{timerx}</div>
-              <div className="button-place-bid">
-                <a onClick={() => {}} href="#" className="tf-button">
-                  <span>Place Bid</span>
-                </a>
-              </div>
             </div>
             <div className="meta-info text-center">
               <h5 className="name">
-                <Link href="#">Dayco serpentine belt</Link>
+                <Link href="/">City Sunset</Link>
               </h5>
-              <h6 className="price gem">
-                <i className="icon-gem" />
-                0,34
-              </h6>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
+          <div className="tf-card-box">
+            <div className="card-media">
+              <Link href="/">
+                <img src="/assets/images/box-item/banner (6).jpg" alt="Foundation1" />
+              </Link>
+            </div>
+            <div className="meta-info text-center">
+              <h5 className="name">
+                <Link href="/">Foundation in Night</Link>
+              </h5>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="tf-card-box">
+            <div className="card-media">
+              <Link href="/">
+                <img src="/assets/images/box-item/banner (7).jpg" alt="Foundation2" />
+              </Link>
+            </div>
+            <div className="meta-info text-center">
+              <h5 className="name">
+                <Link href="/">Foundation in City</Link>
+              </h5>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="tf-card-box">
+            <div className="card-media">
+              <Link href="/">
+                <img src="/assets/images/box-item/banner (8).jpg" alt="lake" />
+              </Link>
+            </div>
+            <div className="meta-info text-center">
+              <h5 className="name">
+                <Link href="/">Peaceful Lake</Link>
+              </h5>
+            </div>
+          </div>
+        </SwiperSlide>
+        <SwiperSlide>
+          <div className="tf-card-box">
+            <div className="card-media">
+              <Link href="/">
+                <img src="/assets/images/box-item/banner (9).jpg" alt="building" />
+              </Link>
+            </div>
+            <div className="meta-info text-center">
+              <h5 className="name">
+                <Link href="/">Company Building</Link>
+              </h5>
+            </div>
+          </div>
+        </SwiperSlide>
+        {/* <SwiperSlide>
           <div className="tf-card-box">
             <div className="card-media">
               <Link href="#">
@@ -212,7 +213,7 @@ export default function TitileSlider1() {
               </h6>
             </div>
           </div>
-        </SwiperSlide>
+        </SwiperSlide> */}
         <div className="swiper-pagination pagination-number" />
       </Swiper>
       <div className="swiper-button-next next-3d over" />
