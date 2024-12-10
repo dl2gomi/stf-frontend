@@ -80,12 +80,6 @@ export const useVault = () => {
     }
   };
 
-  const isStarted = async () => {
-    if (!contract) return;
-
-    return await contract.isStarted();
-  };
-
   const startVault = async () => {
     if (!contract) return;
     if (!isConnected) return;
@@ -394,6 +388,17 @@ export const useVault = () => {
     } catch (error) {
       console.error('Error listing claims:');
       console.error(error);
+      throw error;
+    }
+  };
+
+  const isStarted = async () => {
+    if (!contract) return;
+
+    try {
+      return await contract.isStarted();
+    } catch (error) {
+      console.error('Error reading information:', error);
       throw error;
     }
   };
