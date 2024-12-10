@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useAppKit, useAppKitAccount } from '@reown/appkit/react';
 import Image from 'next/image';
 import { useVault } from '@/hooks';
+import PageHead from './PageHead';
 
 export default function DashboardLayout({ children }) {
   const { open } = useAppKit();
@@ -48,6 +49,7 @@ export default function DashboardLayout({ children }) {
 
   return (
     <>
+      <PageHead headTitle="Santistef International" />
       <div id="wrapper">
         <div id="page" className={`market-page ${isMobileSidebar ? 'full' : ''}`}>
           <div id="market-header">
@@ -61,8 +63,8 @@ export default function DashboardLayout({ children }) {
                   <span className="px-2">1</span>
                 </div>
               </div>
-              <div style={{ fontSize: '16px' }} className="widget-search d-sm-none d-xl-flex">
-                <div className="flex items-center">
+              <div style={{ fontSize: '14px' }} className="widget-search d-sm-none d-xl-flex">
+                <div className="flex items-center" style={{ fontFamily: 'Azeret Mono' }}>
                   <span className="px-2">STF Address</span>
                   <span className="px-2">:</span>
                   <span className="px-2">{process.env.NEXT_PUBLIC_STFTOKEN_ADDRESS}</span>
@@ -272,7 +274,7 @@ export default function DashboardLayout({ children }) {
                   <div className="content mt-30">
                     <h6>Admin</h6>
                     <ul className="menu-tab">
-                      {(role === 'owner' || role === 'ceo') && (
+                      {/* {(role === 'owner' || role === 'ceo') && (
                         <li
                           className={router.pathname === '/dashboard-admin' ? 'tablinks active' : 'tablinks'}
                           onClick={() => {
@@ -335,7 +337,7 @@ export default function DashboardLayout({ children }) {
                           </svg>
                           Dashboard
                         </li>
-                      )}
+                      )} */}
                       {(role === 'owner' || role === 'ceo') && (
                         <li
                           className={router.pathname === '/manage-admins' ? 'tablinks active' : 'tablinks'}

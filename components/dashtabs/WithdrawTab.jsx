@@ -33,7 +33,7 @@ export default function WithdrawTab() {
   return (
     <>
       <div className="wrapper-content">
-        <div className="inner-content">
+        <div className="inner-content" style={{ maxWidth: '100%', minHeight: '90vh' }}>
           <div className="heading-section">
             <h2 className="tf-title pb-30">Withdraw Funds</h2>
           </div>
@@ -111,7 +111,7 @@ export default function WithdrawTab() {
             </form>
           </div>
         </div>
-        <div className="side-bar">
+        {/* <div className="side-bar">
           <div className="widget widget-recently">
             <h5 className="title-widget">Recently added</h5>
             <div className="card-small-main">
@@ -360,7 +360,7 @@ export default function WithdrawTab() {
               <span className="time">16hr ago</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

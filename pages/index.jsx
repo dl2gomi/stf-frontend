@@ -14,7 +14,7 @@ export default function Home() {
       <Layout headerStyle={1} footerStyle={1} pageCls="home-1" headTitle="Santistef International">
         <FlatTitle1 />
         {/* <FeaturedItem1 /> */}
-        <Seller1 />
+        {/* <Seller1 /> */}
         {/* <DiscoverItem1 /> */}
         {/* <TopCollector1 /> */}
         {/* <TopCollections1 /> */}
