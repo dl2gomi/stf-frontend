@@ -44,18 +44,21 @@ export default function RewardsTab() {
                   const claimedAmount = await getProfitAmount(address, year);
                   const balance = await getBalance(address);
 
+                  if (balance === 0n) return;
+
                   return {
                     year,
+                    cid: detail.cid,
                     totalSupply: detail.currentTotalSupply,
                     totalProfit: detail.profit,
                     time: claimedAt !== 0n ? new Date(Number(claimedAt) * 1000) : null,
                     yourProfit:
                       claimedAt !== 0n
                         ? claimedAmount
-                        : (Number(balance) / Number(detail.currentTotalSupply)) * Number(detail.profit),
+                        : Math.floor((Number(balance) / Number(detail.currentTotalSupply)) * Number(detail.profit)),
                     yourSTF:
                       claimedAt !== 0n
-                        ? (Number(claimedAmount) / Number(detail.profit)) * Number(detail.currentTotalSupply)
+                        ? Math.ceil(Number(claimedAmount) / Number(detail.profit)) * Number(detail.currentTotalSupply)
                         : balance,
                     perc:
                       claimedAt !== 0n
@@ -138,7 +141,15 @@ export default function RewardsTab() {
                                 key={detail.year}
                               >
                                 <div className="td3">
-                                  <div className="item-name">{detail.year}</div>
+                                  <div
+                                    className="item-name"
+                                    style={{ textDecoration: 'underline', cursor: 'pointer', color: 'lightgreen' }}
+                                    onClick={() => {
+                                      window.open(`${process.env.NEXT_PUBLIC_PINATA_URL}${detail.cid}`, '_blank');
+                                    }}
+                                  >
+                                    {detail.year}
+                                  </div>
                                 </div>
                                 <div className="td3">
                                   <h6 className="price gem">
@@ -154,7 +165,7 @@ export default function RewardsTab() {
                                   <h6>{parseFloat(formatUnits(detail.yourSTF, stfDecimal)).toLocaleString('en-US')}</h6>
                                 </div>
                                 <div className="td5">
-                                  <h6 className="price gem">{detail.perc}%</h6>
+                                  <h6 className="price gem">{detail.perc.toFixed(2)}%</h6>
                                 </div>
                                 <div className="td6 warning">
                                   <h6>
