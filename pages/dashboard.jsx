@@ -1,11 +1,11 @@
+import { UserDashboard } from '@/components/dashtabs';
 import DashboardLayout from '@/components/layout/DashboardLayout';
-import Market from '@/components/sections/Market';
 import { forUser } from '@/helpers/permission';
 
 const Dashboard = () => {
   return (
     <DashboardLayout>
-      <Market />
+      <UserDashboard />
     </DashboardLayout>
   );
 };
