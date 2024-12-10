@@ -31,7 +31,7 @@ const hardhat = defineChain({
 createAppKit({
   adapters: [ethersAdapter],
   projectId,
-  networks: [hardhat, sepolia, mainnet],
+  networks: [hardhat, sepolia],
   defaultNetwork: sepolia,
   metadata: {
     name: 'Santistef: connect wallet',
