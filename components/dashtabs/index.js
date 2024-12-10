@@ -5,3 +5,4 @@ export { default as UsersTab } from './UsersTab';
 export { default as WithdrawTab } from './WithdrawTab';
 export { default as ProfitShareTab } from './ProfitShareTab';
 export { default as RewardsTab } from './RewardsTab';
+export { default as UserDashboard } from './UserDashboard';

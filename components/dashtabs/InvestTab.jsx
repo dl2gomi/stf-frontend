@@ -66,6 +66,9 @@ export default function InvestTab() {
     <>
       <div className="wrapper-content">
         <div className="inner-content">
+          <div className="heading-section">
+            <h2 className="tf-title pb-30">Invest</h2>
+          </div>
           <div className="mb-3">
             <div className="counter__body">
               <div className="counter">

@@ -71,7 +71,7 @@ export default function RewardsTab() {
           );
         }
       } catch (error) {
-        Toaster.warning(error?.reason ?? 'Something went wrong!');
+        Toaster.warning(error?.reason ?? error?.message ?? 'Something went wrong!');
       }
     })();
   }, [vaultContract, counter, address]);
