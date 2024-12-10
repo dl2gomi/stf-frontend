@@ -10,14 +10,19 @@ import '/public/assets/css/responsive.css';
 import 'react-toastify/dist/ReactToastify.css';
 import ContextProvider from '@/contexts';
 import { ToastContainer } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
   useEffect(() => {
+    setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
-  }, []);
+    }, 500);
+  }, [router.pathname]);
+
   return (
     <>
       <ContextProvider>
