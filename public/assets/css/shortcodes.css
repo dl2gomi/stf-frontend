@@ -5068,6 +5068,10 @@ button.follow:hover {
   line-height: 22px;
 }
 
+.product-item.details .content .details-item span.number span {
+  font-size: 32px !important;
+}
+
 .product-item.traits .content {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
