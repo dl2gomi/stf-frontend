@@ -92,7 +92,7 @@ export default function TaxModal({ isOn, handleTaxModal, taxYear, profitAmount, 
                 <button
                   className="follow"
                   style={{ width: '240px' }}
-                  disabled={filename === ''}
+                  disabled={filename === '' || isUploading}
                   onClick={async (e) => {
                     try {
                       e.preventDefault();
