@@ -141,7 +141,7 @@ section {
 
 html {
   font-size: 62.5%;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   scroll-behavior: smooth;
@@ -2342,31 +2342,31 @@ a:focus {
   transform-origin: bottom center;
   border-top-right-radius: 20px;
   border-top-left-radius: 20px;
-  animation: loader 1.2s linear infinite;
+  animation: loader 0.6s linear infinite;
 }
 .preload-container .bar1 {
-  animation-delay: 0.1s;
+  animation-delay: 0.05s;
 }
 .preload-container .bar2 {
-  animation-delay: 0.2s;
+  animation-delay: 0.1s;
 }
 .preload-container .bar3 {
-  animation-delay: 0.3s;
+  animation-delay: 0.15s;
 }
 .preload-container .bar4 {
-  animation-delay: 0.4s;
+  animation-delay: 0.2s;
 }
 .preload-container .bar5 {
-  animation-delay: 0.5s;
+  animation-delay: 0.25s;
 }
 .preload-container .bar6 {
-  animation-delay: 0.6s;
+  animation-delay: 0.3s;
 }
 .preload-container .bar7 {
-  animation-delay: 0.7s;
+  animation-delay: 0.35s;
 }
 .preload-container .bar8 {
-  animation-delay: 0.8s;
+  animation-delay: 0.4s;
 }
 
 .progress-wrap {
