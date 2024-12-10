@@ -132,40 +132,45 @@ export default function UserDashboard() {
             </h2>
           </div>
           <div className="row">
-            <div className="col-lg-6 flex items-center">
-              <div style={{ height: '500px', margin: 'auto' }} className="w-100 justify-center flex items-center">
-                <Pie
-                  data={{
-                    labels: ['Others', 'Yours'],
-                    datasets: [
-                      {
-                        label: 'Investment Overview',
-                        data: [totalInvest - yourInvest, yourInvest],
-                        backgroundColor: ['#ebc14c', '#ddf247'],
-                        borderWidth: 0,
-                        hoverOffset: 10,
-                      },
-                    ],
-                  }}
-                  options={{
-                    responsive: true,
-                    plugins: {
-                      legend: {
-                        position: 'right', // Position of the legend
-                        labels: {
-                          // This more specific font property overrides the global property
-                          font: {
-                            size: 18,
+            <div className="col-lg-6 flex items-center justify-center">
+              {totalInvest === 0 && (
+                <div style={{ fontSize: '48px', padding: '20px', color: 'yellow' }}>No investment yet</div>
+              )}
+              {totalInvest !== 0 && (
+                <div style={{ height: '500px', margin: 'auto' }} className="w-100 justify-center flex items-center">
+                  <Pie
+                    data={{
+                      labels: ['Others', 'Yours'],
+                      datasets: [
+                        {
+                          label: 'Investment Overview',
+                          data: [totalInvest - yourInvest, yourInvest],
+                          backgroundColor: ['#ebc14c', '#ddf247'],
+                          borderWidth: 0,
+                          hoverOffset: 10,
+                        },
+                      ],
+                    }}
+                    options={{
+                      responsive: true,
+                      plugins: {
+                        legend: {
+                          position: 'right', // Position of the legend
+                          labels: {
+                            // This more specific font property overrides the global property
+                            font: {
+                              size: 18,
+                            },
                           },
                         },
+                        tooltip: {
+                          enabled: true, // Display tooltips
+                        },
                       },
-                      tooltip: {
-                        enabled: true, // Display tooltips
-                      },
-                    },
-                  }}
-                />
-              </div>
+                    }}
+                  />
+                </div>
+              )}
             </div>
             <div className="col-lg-4 flex items-center">
               <div className="w-100">

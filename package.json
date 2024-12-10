@@ -1,8 +1,8 @@
 {
-    "name": "name",
-    "version": "0.1.1",
+    "name": "stf-frontend",
+    "version": "0.2.0",
     "private": true,
-    "author": "author",
+    "author": "anonymous developer",
     "scripts": {
         "dev": "next dev",
         "build": "next build",
