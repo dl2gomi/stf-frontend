@@ -5,6 +5,7 @@ import { useERC20, useToken, useVault } from '@/hooks';
 import { formatUnits, isAddress, parseUnits } from 'ethers';
 import Toaster from '@/helpers/Toaster';
 import TaxModal from '@/components/elements/TaxModal';
+import { useRouter } from 'next/router';
 
 export default function ProfitShareTab() {
   const { address, isConnected } = useAppKitAccount();
@@ -18,6 +19,8 @@ export default function ProfitShareTab() {
 
   const [isTaxModal, setTaxModal] = useState(false);
   const handleTaxModal = () => setTaxModal(!isTaxModal);
+
+  const router = useRouter();
 
   const { contract: vaultContract, getProfitPool, getTaxYears, getTaxDetail, depositProfit, uploadTaxDoc } = useVault();
   const {
@@ -43,6 +46,7 @@ export default function ProfitShareTab() {
                 year,
                 totalSupply: detail.currentTotalSupply,
                 profit: detail.profit,
+                cid: detail.cid,
                 time: new Date(Number(detail.timestamp) * 1000),
               };
             })
@@ -185,7 +189,10 @@ export default function ProfitShareTab() {
                       <div className="author flex items-center flex-grow">
                         <div className="info">
                           <h6>
-                            <Link href="#" style={{ fontFamily: 'Consolas' }}>
+                            <Link
+                              href={`${process.env.NEXT_PUBLIC_PINATA_URL}${doc.cid}`}
+                              style={{ fontFamily: 'Consolas' }}
+                            >
                               {doc.year}
                             </Link>
                           </h6>
@@ -198,7 +205,15 @@ export default function ProfitShareTab() {
                           </span>
                         </div>
                       </div>
-                      <button className="follow hidden-sm-down">Detail</button>
+                      <button
+                        className="follow hidden-sm-down"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          window.open(`${process.env.NEXT_PUBLIC_PINATA_URL}${doc.cid}`, '_blank');
+                        }}
+                      >
+                        Detail
+                      </button>
                     </div>
                   ))}
               </div>
