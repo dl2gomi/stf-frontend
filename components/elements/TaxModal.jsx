@@ -107,7 +107,8 @@ export default function TaxModal({ isOn, handleTaxModal, taxYear, profitAmount, 
                         setCid(result?.data?.IpfsHash);
                         setStep(1);
                       } else {
-                        handleShare(cid);
+                        await handleShare(cid);
+                        setStep(0);
                       }
                     } catch (error) {
                       Toaster.error(error?.reason ?? error?.message ?? 'Something went wrong!');
