@@ -65,7 +65,7 @@ export default function TaxModal({ isOn, handleTaxModal, taxYear, profitAmount, 
                           value={filename}
                           disabled={isUploading}
                           onChange={(e) => {
-                            setFilename(e.target.value);
+                            setFilename(e.target.value.trim());
                             setFile(e.target.files[0]);
                           }}
                         />

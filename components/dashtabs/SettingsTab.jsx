@@ -78,7 +78,7 @@ export default function SettingsTab() {
                     tabIndex={2}
                     aria-required="true"
                     value={newVaultAddress}
-                    onChange={(e) => setNewVaultAddress(e.target.value)}
+                    onChange={(e) => setNewVaultAddress(e.target.value.trim())}
                   />
                 </fieldset>
                 <div className="btn-submit">
@@ -133,7 +133,7 @@ export default function SettingsTab() {
                     tabIndex={2}
                     aria-required="true"
                     value={newMaxSupply}
-                    onChange={(e) => setNewMaxSupply(e.target.value)}
+                    onChange={(e) => setNewMaxSupply(e.target.value.trim())}
                   />
                 </fieldset>
                 <fieldset className="name">
@@ -144,7 +144,7 @@ export default function SettingsTab() {
                     tabIndex={2}
                     aria-required="true"
                     value={newTokenPrice}
-                    onChange={(e) => setNewTokenPrice(e.target.value)}
+                    onChange={(e) => setNewTokenPrice(e.target.value.trim())}
                   />
                 </fieldset>
               </div>
