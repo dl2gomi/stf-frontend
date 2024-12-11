@@ -133,10 +133,10 @@ export default function UserDashboard() {
           </div>
           <div className="row">
             <div className="col-lg-6 flex items-center justify-center">
-              {totalInvest === 0 && (
+              {parseFloat(totalInvest) === 0 && (
                 <div style={{ fontSize: '48px', padding: '20px', color: 'yellow' }}>No investment yet</div>
               )}
-              {totalInvest !== 0 && (
+              {parseFloat(totalInvest) !== 0 && (
                 <div style={{ height: '500px', margin: 'auto' }} className="w-100 justify-center flex items-center">
                   <Pie
                     data={{
