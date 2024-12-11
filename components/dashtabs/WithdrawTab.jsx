@@ -39,7 +39,9 @@ export default function WithdrawTab() {
           </div>
           <div className="widget-edit mb-30 avatar">
             <div className="title">
-              <h4 className="text-truncate">Available Funds to Withdraw: {availFunds}</h4>
+              <h4 className="text-truncate">
+                Available Funds to Withdraw: {parseFloat(availFunds).toLocaleString('en-US')}
+              </h4>
               <i className="icon-keyboard_arrow_up" />
             </div>
             <form>
