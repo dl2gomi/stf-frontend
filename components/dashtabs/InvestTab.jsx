@@ -119,7 +119,7 @@ export default function InvestTab() {
                     aria-required="true"
                     value={amount}
                     onChange={(e) => {
-                      setAmount(e.target.value);
+                      setAmount(e.target.value.trim());
                     }}
                   />
                 </fieldset>

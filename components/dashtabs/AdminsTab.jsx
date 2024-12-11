@@ -104,7 +104,7 @@ export default function AdminsTab() {
                     tabIndex={2}
                     aria-required="true"
                     value={newCEOAddress}
-                    onChange={(e) => setNewCEOAddress(e.target.value)}
+                    onChange={(e) => setNewCEOAddress(e.target.value.trim())}
                   />
                 </fieldset>
                 <div className="btn-submit">
@@ -198,7 +198,7 @@ export default function AdminsTab() {
                     tabIndex={2}
                     aria-required="true"
                     value={newOperAddress}
-                    onChange={(e) => setNewOperAddress(e.target.value)}
+                    onChange={(e) => setNewOperAddress(e.target.value.trim())}
                   />
                 </fieldset>
                 <div className="btn-submit">

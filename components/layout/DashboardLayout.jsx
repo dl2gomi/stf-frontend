@@ -58,7 +58,7 @@ export default function DashboardLayout({ children }) {
                 <div className="flex items-center">
                   <Image src="/assets/images/tokens/usdt.png" alt="USDT" width={24} height={24}></Image>
                   <span className="px-2">{price.toString()}</span>
-                  <span className="px-2">/</span>
+                  <span className="px-2">=</span>
                   <Image src="/assets/icon/Favicon.png" alt="STF" width={22} height={24}></Image>
                   <span className="px-2">1</span>
                 </div>

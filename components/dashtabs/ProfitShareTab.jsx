@@ -126,7 +126,7 @@ export default function ProfitShareTab() {
                   tabIndex={2}
                   aria-required="true"
                   value={taxYear}
-                  onChange={(e) => setTaxYear(e.target.value)}
+                  onChange={(e) => setTaxYear(e.target.value.trim())}
                 />
               </fieldset>
               <fieldset>
@@ -137,7 +137,7 @@ export default function ProfitShareTab() {
                   tabIndex={2}
                   aria-required="true"
                   value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+                  onChange={(e) => setAmount(e.target.value.trim())}
                 />
               </fieldset>
               <div className="btn-submit">
