@@ -52,7 +52,7 @@ export default function WithdrawTab() {
                   tabIndex={2}
                   aria-required="true"
                   value={addressTo}
-                  onChange={(e) => setAddressTo(e.target.value)}
+                  onChange={(e) => setAddressTo(e.target.value.trim())}
                 />
               </fieldset>
               <fieldset className="password">
@@ -64,7 +64,7 @@ export default function WithdrawTab() {
                   tabIndex={2}
                   aria-required="true"
                   value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+                  onChange={(e) => setAmount(e.target.value.trim())}
                 />
               </fieldset>
               <div className="btn-submit">
