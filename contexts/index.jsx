@@ -34,14 +34,18 @@ createAppKit({
   networks: [hardhat, sepolia],
   defaultNetwork: sepolia,
   metadata: {
-    name: 'Santistef: connect wallet',
-    description: 'Connect wallet to Santistef investment platform',
-    url: 'https://reown.com/appkit',
-    icons: ['https://avatars.githubusercontent.com/u/179229932?s=200&v=4'],
+    name: 'Santistef',
+    description: 'Santistef Investment Platform',
+    url: 'https://santistef.vercel.app',
+    icons: ['https://santistef.vercel.app/assets/icon/Favicon.png'],
   },
   features: {
     email: false,
     socials: false,
+    swaps: false,
+    history: false,
+    onramp: false,
+    analytics: false,
   },
 });
 
