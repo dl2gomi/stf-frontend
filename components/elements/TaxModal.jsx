@@ -3,6 +3,7 @@ import { faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
 import { uploadFileToPinata } from '@/helpers/pinataHandler';
 import Toaster from '@/helpers/Toaster';
+import { SpinLoading } from 'respinner';
 
 export default function TaxModal({ isOn, handleTaxModal, taxYear, profitAmount, handleShare }) {
   const [step, setStep] = useState(0);
@@ -10,6 +11,7 @@ export default function TaxModal({ isOn, handleTaxModal, taxYear, profitAmount, 
   const [file, setFile] = useState({});
   const [filename, setFilename] = useState('');
   const [isUploading, setUploading] = useState(false);
+  const [isConfirming, setConfirming] = useState(false);
 
   return (
     <>
@@ -19,12 +21,14 @@ export default function TaxModal({ isOn, handleTaxModal, taxYear, profitAmount, 
             <button
               type="button"
               className="close"
+              disabled={isUploading || isConfirming}
               onClick={() => {
                 setStep(0);
                 setFilename('');
                 setFile({});
                 setCid('');
                 setUploading(false);
+                setConfirming(false);
 
                 handleTaxModal();
               }}
@@ -92,31 +96,61 @@ export default function TaxModal({ isOn, handleTaxModal, taxYear, profitAmount, 
                 <button
                   className="follow"
                   style={{ width: '240px' }}
-                  disabled={filename === '' || isUploading}
+                  disabled={filename === '' || isUploading || isConfirming}
                   onClick={async (e) => {
                     try {
                       e.preventDefault();
 
                       if (step === 0) {
                         setUploading(true);
-                        const result = await uploadFileToPinata(file, taxYear);
 
-                        setUploading(false);
+                        const result = await uploadFileToPinata(file, taxYear);
                         Toaster.success('Successfully uploaded a tax document.');
 
                         setCid(result?.data?.IpfsHash);
                         setStep(1);
                       } else {
+                        setConfirming(true);
                         await handleShare(cid);
                         setStep(0);
                       }
                     } catch (error) {
                       Toaster.error(error?.reason ?? error?.message ?? 'Something went wrong!');
+                    } finally {
+                      setUploading(false);
+                      setConfirming(false);
                     }
                   }}
                 >
-                  {isUploading && <>Uploading...</>}
-                  {!isUploading && (
+                  {isUploading && (
+                    <div>
+                      <SpinLoading
+                        size={20}
+                        count={10}
+                        barWidth={3}
+                        barHeight={5}
+                        borderRadius={1}
+                        fill="gray"
+                        className="align-middle mx-2"
+                      />
+                      Uploading...
+                    </div>
+                  )}
+                  {isConfirming && (
+                    <div>
+                      <SpinLoading
+                        size={20}
+                        count={10}
+                        barWidth={3}
+                        barHeight={5}
+                        borderRadius={1}
+                        fill="gray"
+                        className="align-middle mx-2"
+                      />
+                      Sharing...
+                    </div>
+                  )}
+                  {!isUploading && !isConfirming && (
                     <>
                       {step === 0 ? 'Next' : 'Confirm'} <FontAwesomeIcon icon={faArrowAltCircleRight} />
                     </>

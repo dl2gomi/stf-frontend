@@ -6,6 +6,7 @@ import { formatUnits, isAddress, parseUnits } from 'ethers';
 import Toaster from '@/helpers/Toaster';
 import TaxModal from '@/components/elements/TaxModal';
 import { useRouter } from 'next/router';
+import { SpinLoading } from 'respinner';
 
 export default function ProfitShareTab() {
   const { address, isConnected } = useAppKitAccount();
@@ -153,13 +154,27 @@ export default function ProfitShareTab() {
                 </button>
                 <button
                   className="w242"
-                  disabled={!taxYear || !amount}
+                  disabled={!taxYear || !amount || isTaxModal}
                   onClick={(e) => {
                     e.preventDefault();
                     handleTaxModal();
                   }}
                 >
-                  Share Profit
+                  {!isTaxModal && 'Share Profit'}
+                  {isTaxModal && (
+                    <div className="">
+                      <SpinLoading
+                        size={20}
+                        count={10}
+                        barWidth={3}
+                        barHeight={5}
+                        borderRadius={1}
+                        fill="gray"
+                        className="align-middle mx-2"
+                      />
+                      Sharing...
+                    </div>
+                  )}
                 </button>
               </div>
             </form>

@@ -6,6 +6,7 @@ import { isAddress } from 'ethers';
 import Toaster from '@/helpers/Toaster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { SpinLoading } from 'respinner';
 
 export default function AdminsTab() {
   const [role, setRole] = useState(undefined);
@@ -13,6 +14,10 @@ export default function AdminsTab() {
   const [newOperAddress, setNewOperAddress] = useState('');
   const [ceoAddresses, setCEOAddresses] = useState([]);
   const [operatorAddresses, setOperatorAddresses] = useState([]);
+  const [isAddingCEO, setAddingCEO] = useState(false);
+  const [isRemovingCEO, setRemovingCEO] = useState({});
+  const [isAddingOper, setAddingOper] = useState(false);
+  const [isRemovingOper, setRemovingOper] = useState({});
 
   const { address } = useAppKitAccount();
   const {
@@ -67,34 +72,64 @@ export default function AdminsTab() {
                       value={addr}
                       style={{ backgroundColor: '#1f1f1f', color: '#cccccc' }}
                     />
-                    <FontAwesomeIcon
-                      icon={faTrashCan}
-                      size="xl"
-                      className="absolute"
-                      style={{
-                        right: '10px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        padding: '10px',
-                        cursor: 'pointer',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.color = 'rgba(221, 242, 71, 1)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.color = 'white';
-                      }}
-                      onClick={async () => {
-                        try {
-                          await removeCEO(addr);
-                          setCEOAddresses(await getCEOAddresses());
+                    {isRemovingCEO[addr] && (
+                      <div>
+                        <SpinLoading
+                          size={20}
+                          count={10}
+                          barWidth={3}
+                          barHeight={5}
+                          borderRadius={1}
+                          fill="gray"
+                          className="align-middle mx-2 absolute"
+                          style={{
+                            right: '12px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                          }}
+                        />
+                      </div>
+                    )}
+                    {!isRemovingCEO[addr] && (
+                      <FontAwesomeIcon
+                        icon={faTrashCan}
+                        size="xl"
+                        className="absolute"
+                        style={{
+                          right: '10px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          padding: '10px',
+                          cursor: 'pointer',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.color = 'rgba(221, 242, 71, 1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.color = 'white';
+                        }}
+                        onClick={async () => {
+                          try {
+                            setRemovingCEO({
+                              ...isRemovingCEO,
+                              [addr]: true,
+                            });
 
-                          Toaster.success(`${addr} has been removed from the CEO addresses.`);
-                        } catch (error) {
-                          Toaster.error(error?.reason ?? 'There was an error during execution.');
-                        }
-                      }}
-                    />
+                            await removeCEO(addr);
+                            setCEOAddresses(await getCEOAddresses());
+
+                            Toaster.success(`${addr} has been removed from the CEO addresses.`);
+                          } catch (error) {
+                            Toaster.error(error?.reason ?? 'There was an error during execution.');
+                          } finally {
+                            setRemovingCEO({
+                              ...isRemovingCEO,
+                              [addr]: false,
+                            });
+                          }
+                        }}
+                      />
+                    )}
                   </fieldset>
                 ))}
                 <fieldset>
@@ -119,7 +154,7 @@ export default function AdminsTab() {
                   </button>
                   <button
                     className="w242"
-                    disabled={!newCEOAddress}
+                    disabled={!newCEOAddress || isAddingCEO}
                     onClick={async (e) => {
                       try {
                         e.preventDefault();
@@ -128,6 +163,8 @@ export default function AdminsTab() {
                           return;
                         }
 
+                        setAddingCEO(true);
+
                         await addCEO(newCEOAddress);
                         setCEOAddresses(await getCEOAddresses());
                         setNewCEOAddress('');
@@ -135,10 +172,26 @@ export default function AdminsTab() {
                         Toaster.success('New CEO address has been successfully added.');
                       } catch (error) {
                         Toaster.error(error?.reason ?? 'There was an error during execution.');
+                      } finally {
+                        setAddingCEO(false);
                       }
                     }}
                   >
-                    Add
+                    {!isAddingCEO && 'Add'}
+                    {isAddingCEO && (
+                      <div>
+                        <SpinLoading
+                          size={20}
+                          count={10}
+                          barWidth={3}
+                          barHeight={5}
+                          borderRadius={1}
+                          fill="gray"
+                          className="align-middle mx-2"
+                        />
+                        Adding...
+                      </div>
+                    )}
                   </button>
                 </div>
               </form>
@@ -161,34 +214,64 @@ export default function AdminsTab() {
                       value={addr}
                       style={{ backgroundColor: '#1f1f1f', color: '#cccccc' }}
                     />
-                    <FontAwesomeIcon
-                      icon={faTrashCan}
-                      size="xl"
-                      className="absolute"
-                      style={{
-                        right: '10px',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        padding: '10px',
-                        cursor: 'pointer',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.target.style.color = 'rgba(221, 242, 71, 1)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.target.style.color = 'white';
-                      }}
-                      onClick={async () => {
-                        try {
-                          await removeOperator(addr);
-                          setOperatorAddresses(await getOperatorAddresses());
+                    {isRemovingOper[addr] && (
+                      <div>
+                        <SpinLoading
+                          size={20}
+                          count={10}
+                          barWidth={3}
+                          barHeight={5}
+                          borderRadius={1}
+                          fill="gray"
+                          className="align-middle mx-2 absolute"
+                          style={{
+                            right: '12px',
+                            top: '50%',
+                            transform: 'translateY(-50%)',
+                          }}
+                        />
+                      </div>
+                    )}
+                    {!isRemovingOper[addr] && (
+                      <FontAwesomeIcon
+                        icon={faTrashCan}
+                        size="xl"
+                        className="absolute"
+                        style={{
+                          right: '10px',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          padding: '10px',
+                          cursor: 'pointer',
+                        }}
+                        onMouseEnter={(e) => {
+                          e.target.style.color = 'rgba(221, 242, 71, 1)';
+                        }}
+                        onMouseLeave={(e) => {
+                          e.target.style.color = 'white';
+                        }}
+                        onClick={async () => {
+                          try {
+                            setRemovingOper({
+                              ...isRemovingOper,
+                              [addr]: true,
+                            });
 
-                          Toaster.success(`${addr} has been removed from the Operator addresses.`);
-                        } catch (error) {
-                          Toaster.error(error?.reason ?? 'There was an error during execution.');
-                        }
-                      }}
-                    />
+                            await removeOperator(addr);
+                            setOperatorAddresses(await getOperatorAddresses());
+
+                            Toaster.success(`${addr} has been removed from the Operator addresses.`);
+                          } catch (error) {
+                            Toaster.error(error?.reason ?? 'There was an error during execution.');
+                          } finally {
+                            setRemovingOper({
+                              ...isRemovingOper,
+                              [addr]: false,
+                            });
+                          }
+                        }}
+                      />
+                    )}
                   </fieldset>
                 ))}
                 <fieldset>
@@ -213,7 +296,7 @@ export default function AdminsTab() {
                   </button>
                   <button
                     className="w242"
-                    disabled={!newOperAddress}
+                    disabled={!newOperAddress || isAddingOper}
                     onClick={async (e) => {
                       try {
                         e.preventDefault();
@@ -222,6 +305,8 @@ export default function AdminsTab() {
                           return;
                         }
 
+                        setAddingOper(true);
+
                         await addOperator(newOperAddress);
                         setOperatorAddresses(await getOperatorAddresses());
                         setNewOperAddress('');
@@ -229,10 +314,26 @@ export default function AdminsTab() {
                         Toaster.success('New operator address has been successfully added.');
                       } catch (error) {
                         Toaster.error(error?.reason ?? 'There was an error during execution.');
+                      } finally {
+                        setAddingOper(false);
                       }
                     }}
                   >
-                    Add
+                    {!isAddingOper && 'Add'}
+                    {isAddingOper && (
+                      <div>
+                        <SpinLoading
+                          size={20}
+                          count={10}
+                          barWidth={3}
+                          barHeight={5}
+                          borderRadius={1}
+                          fill="gray"
+                          className="align-middle mx-2"
+                        />
+                        Adding...
+                      </div>
+                    )}
                   </button>
                 </div>
               </form>

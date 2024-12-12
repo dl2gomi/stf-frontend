@@ -4668,7 +4668,7 @@ button.follow:hover {
 }
 
 .widget-table-ranking .table-ranking-heading .column {
-  width: 101px;
+  width: 120px;
 }
 
 .widget-table-ranking .table-ranking-heading h3 {
@@ -4700,7 +4700,7 @@ button.follow:hover {
 .widget-table-ranking .table-ranking-content .fl-row-ranking .td5,
 .widget-table-ranking .table-ranking-content .fl-row-ranking .td6,
 .widget-table-ranking .table-ranking-content .fl-row-ranking .td7 {
-  width: 101px;
+  width: 120px;
   display: flex;
   align-items: center;
   gap: 14px;
