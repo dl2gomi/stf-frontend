@@ -2494,3 +2494,7 @@ body.background-white .tf-mouse-inner {
 body.background-white .tf-mouse-outer {
   border-color: rgba(22, 22, 22, 1);
 }
+
+.font-manrope {
+  font-family: 'Manrope' !important;
+}

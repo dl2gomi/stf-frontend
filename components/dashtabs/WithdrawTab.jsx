@@ -4,11 +4,13 @@ import { useAppKitAccount } from '@reown/appkit/react';
 import { useERC20, useToken, useVault } from '@/hooks';
 import { formatUnits, isAddress, parseUnits } from 'ethers';
 import Toaster from '@/helpers/Toaster';
+import { SpinLoading } from 'respinner';
 
 export default function WithdrawTab() {
   const [availFunds, setAvailFunds] = useState(0);
   const [addressTo, setAddressTo] = useState('');
   const [amount, setAmount] = useState('');
+  const [isWithdrawing, setWithdrawing] = useState(false);
 
   const { contract: vaultContract, getProfitPool, withdraw } = useVault();
   const {
@@ -82,7 +84,7 @@ export default function WithdrawTab() {
                 </button>
                 <button
                   className="w242"
-                  disabled={!addressTo || !amount}
+                  disabled={!addressTo || !amount || isWithdrawing}
                   onClick={async (e) => {
                     try {
                       e.preventDefault();
@@ -90,6 +92,8 @@ export default function WithdrawTab() {
                         Toaster.warning('Invalid address format!');
                         return;
                       }
+
+                      setWithdrawing(true);
 
                       await withdraw(addressTo, parseUnits(amount, await getDecimals()));
                       setAvailFunds(
@@ -104,10 +108,26 @@ export default function WithdrawTab() {
                       Toaster.success('You have successfully withdrawn funds.');
                     } catch (error) {
                       Toaster.error(error?.reason ?? 'There was an error during execution.');
+                    } finally {
+                      setWithdrawing(false);
                     }
                   }}
                 >
-                  Withdraw
+                  {!isWithdrawing && 'Withdraw'}
+                  {isWithdrawing && (
+                    <div className="">
+                      <SpinLoading
+                        size={20}
+                        count={10}
+                        barWidth={3}
+                        barHeight={5}
+                        borderRadius={1}
+                        fill="gray"
+                        className="align-middle mx-2"
+                      />
+                      Withdrawing...
+                    </div>
+                  )}
                 </button>
               </div>
             </form>

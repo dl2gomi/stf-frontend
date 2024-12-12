@@ -4,6 +4,7 @@ import { useAppKitAccount } from '@reown/appkit/react';
 import { useERC20, useToken, useVault } from '@/hooks';
 import { formatUnits, isAddress, parseUnits } from 'ethers';
 import Toaster from '@/helpers/Toaster';
+import { SpinLoading } from 'respinner';
 
 export default function RewardsTab() {
   const { address, isConnected } = useAppKitAccount();
@@ -11,6 +12,8 @@ export default function RewardsTab() {
   const [usdtDecimal, setUSDTDecimal] = useState(0);
   const [stfDecimal, setSTFDecimal] = useState(0);
   const [counter, setCounter] = useState(0);
+
+  const [isClaiming, setClaiming] = useState({});
 
   const {
     contract: vaultContract,
@@ -49,6 +52,7 @@ export default function RewardsTab() {
                   return {
                     year,
                     cid: detail.cid,
+                    docTime: new Date(Number(detail.timestamp) * 1000),
                     totalSupply: detail.currentTotalSupply,
                     totalProfit: detail.profit,
                     time: claimedAt !== 0n ? new Date(Number(claimedAt) * 1000) : null,
@@ -108,10 +112,13 @@ export default function RewardsTab() {
                         <h3>Total Profit</h3>
                       </div>
                       <div className="column">
-                        <h3>Total STF</h3>
+                        <h3>Share Date</h3>
                       </div>
                       <div className="column">
-                        <h3>Your STF</h3>
+                        <h3>Total STF(timed)</h3>
+                      </div>
+                      <div className="column">
+                        <h3>Your STF(timed)</h3>
                       </div>
                       <div className="column">
                         <h3>Share %</h3>
@@ -157,6 +164,11 @@ export default function RewardsTab() {
                                   </h6>
                                 </div>
                                 <div className="td3">
+                                  <h6 style={{ fontWeight: '400', fontFamily: 'arial' }}>
+                                    {detail.docTime?.toLocaleDateString()}
+                                  </h6>
+                                </div>
+                                <div className="td3">
                                   <h6>
                                     {parseFloat(formatUnits(detail.totalSupply, stfDecimal)).toLocaleString('en-US')}
                                   </h6>
@@ -176,18 +188,29 @@ export default function RewardsTab() {
                                   </h6>
                                 </div>
                                 <div className="td7">
-                                  <h6>
+                                  <h6 style={{ fontWeight: '400', fontFamily: 'arial' }}>
                                     {detail.time ? (
                                       <div style={{ padding: '10px 0', lineHeight: '16px' }}>
                                         {detail.time.toLocaleDateString()}
                                       </div>
                                     ) : (
                                       <button
-                                        className="hidden-sm-down"
-                                        style={{ height: '36px', lineHeight: '16px' }}
+                                        className=""
+                                        style={{
+                                          height: '36px',
+                                          lineHeight: '16px',
+                                          overflow: 'hidden',
+                                          width: '70px',
+                                          padding: '8px',
+                                        }}
                                         onClick={async (e) => {
                                           try {
                                             e.preventDefault();
+
+                                            setClaiming({
+                                              ...isClaiming,
+                                              [detail.year]: true,
+                                            });
 
                                             await claimProfit(detail.year);
                                             setCounter(counter + 1);
@@ -195,10 +218,28 @@ export default function RewardsTab() {
                                             Toaster.success('You have successfully claimed your profit.');
                                           } catch (error) {
                                             Toaster.error(error?.reason ?? 'There was an error during execution.');
+                                          } finally {
+                                            setClaiming({
+                                              ...isClaiming,
+                                              [detail.year]: false,
+                                            });
                                           }
                                         }}
                                       >
-                                        Claim
+                                        {!isClaiming[detail.year] && 'Claim'}
+                                        {isClaiming[detail.year] && (
+                                          <div>
+                                            <SpinLoading
+                                              size={20}
+                                              count={10}
+                                              barWidth={3}
+                                              barHeight={5}
+                                              borderRadius={1}
+                                              fill="gray"
+                                              className="align-middle mx-2"
+                                            />
+                                          </div>
+                                        )}
                                       </button>
                                     )}
                                   </h6>
