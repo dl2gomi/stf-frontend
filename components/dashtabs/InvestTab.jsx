@@ -11,6 +11,7 @@ import { useAppKitAccount } from '@reown/appkit/react';
 import { formatUnits, parseUnits } from 'ethers';
 import Toaster from '@/helpers/Toaster';
 import invest from '@/pages/invest';
+import { SpinLoading } from 'respinner';
 
 export default function InvestTab() {
   const { address, isConnected } = useAppKitAccount();
@@ -32,6 +33,8 @@ export default function InvestTab() {
   const [stf, setStf] = useState('');
 
   const [counter, setCounter] = useState(0);
+
+  const [isInvesting, setInvesting] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -141,7 +144,7 @@ export default function InvestTab() {
                 </button>
                 <button
                   className="w242"
-                  disabled={amount.trim() === ''}
+                  disabled={amount.trim() === '' || isInvesting}
                   onClick={async (e) => {
                     try {
                       e.preventDefault();
@@ -151,14 +154,18 @@ export default function InvestTab() {
                         return;
                       }
 
+                      setInvesting(true);
+
                       if ((await getUSDTBalance(address)) < parseUnits(amount, await getUSDTDecimals())) {
                         Toaster.warning('You have insufficient funds.');
+                        setInvesting(false);
                         return;
                       }
 
                       // check if started
                       if (!(await isStarted())) {
                         Toaster.error('Investment not started yet.');
+                        setInvesting(false);
                         return;
                       }
 
@@ -177,10 +184,26 @@ export default function InvestTab() {
                       Toaster.success('You have successfully invested and got STF tokens.');
                     } catch (error) {
                       Toaster.error(error?.reason ?? 'There was an error during execution.');
+                    } finally {
+                      setInvesting(false);
                     }
                   }}
                 >
-                  Invest
+                  {!isInvesting && 'Invest'}
+                  {isInvesting && (
+                    <div>
+                      <SpinLoading
+                        size={20}
+                        count={10}
+                        barWidth={3}
+                        barHeight={5}
+                        borderRadius={1}
+                        fill="gray"
+                        className="align-middle mx-2"
+                      />
+                      Investing...
+                    </div>
+                  )}
                 </button>
               </div>
             </form>

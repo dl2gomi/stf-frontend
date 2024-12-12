@@ -4,6 +4,7 @@ import { useAppKitAccount } from '@reown/appkit/react';
 import { useToken, useVault } from '@/hooks';
 import { isAddress } from 'ethers';
 import Toaster from '@/helpers/Toaster';
+import { SpinLoading } from 'respinner';
 
 export default function SettingsTab() {
   const [role, setRole] = useState(undefined);
@@ -14,6 +15,10 @@ export default function SettingsTab() {
   const [tokenPrice, setTokenPrice] = useState(undefined);
   const [newTokenPrice, setNewTokenPrice] = useState('');
   const [started, setStarted] = useState(false);
+
+  const [vaultWaiting, setVaultWaiting] = useState(false);
+  const [detailWaiting, setDetailWaiting] = useState(false);
+  const [startWaiting, setStartWaiting] = useState(false);
 
   const { address } = useAppKitAccount();
   const {
@@ -93,26 +98,46 @@ export default function SettingsTab() {
                   </button>
                   <button
                     className="w242"
-                    disabled={!newVaultAddress}
+                    disabled={!newVaultAddress || vaultWaiting}
                     onClick={async (e) => {
                       try {
                         e.preventDefault();
+
                         if (!isAddress(newVaultAddress)) {
                           Toaster.warning('Invalid address format!');
                           return;
                         }
 
+                        setVaultWaiting(true);
+
                         await setVault(newVaultAddress);
+
                         setVaultAddress(await getVault());
                         setNewVaultAddress('');
 
                         Toaster.success('The vault address has been successfully changed.');
                       } catch (error) {
                         Toaster.error(error?.reason ?? 'There was an error during execution.');
+                      } finally {
+                        setVaultWaiting(false);
                       }
                     }}
                   >
-                    Save
+                    {!vaultWaiting && 'Save'}
+                    {vaultWaiting && (
+                      <div className="">
+                        <SpinLoading
+                          size={20}
+                          count={10}
+                          barWidth={3}
+                          barHeight={5}
+                          borderRadius={1}
+                          fill="gray"
+                          className="align-middle mx-2"
+                        />
+                        Saving...
+                      </div>
+                    )}
                   </button>
                 </div>
               </form>
@@ -126,7 +151,9 @@ export default function SettingsTab() {
             <form className="comment-form" noValidate="novalidate">
               <div className="flex gap30">
                 <fieldset className="name">
-                  <label>Maximum Supply {`(Current: ${maxSupply ?? '----'})`}</label>
+                  <label>
+                    Maximum Supply {`(Current: ${maxSupply ? parseFloat(maxSupply).toLocaleString('en-US') : '----'})`}
+                  </label>
                   <input
                     type="text"
                     placeholder="Enter the maximum supply"
@@ -137,7 +164,10 @@ export default function SettingsTab() {
                   />
                 </fieldset>
                 <fieldset className="name">
-                  <label>STF Token Price {`(Current: ${tokenPrice ?? '----'})`}</label>
+                  <label>
+                    STF Token Price{' '}
+                    {`(Current: ${Number(tokenPrice) ? Number(tokenPrice).toLocaleString('en-US') : '----'})`}
+                  </label>
                   <input
                     type="text"
                     placeholder="Enter the STF price"
@@ -161,7 +191,7 @@ export default function SettingsTab() {
                 </button>
                 <button
                   className="w242"
-                  disabled={!newMaxSupply || !newTokenPrice}
+                  disabled={!newMaxSupply || !newTokenPrice || detailWaiting}
                   onClick={async (e) => {
                     try {
                       e.preventDefault();
@@ -169,6 +199,8 @@ export default function SettingsTab() {
                         Toaster.warning('New max supply should be greater than current one.');
                         return;
                       }
+
+                      setDetailWaiting(true);
 
                       await setTokenDetails(newMaxSupply, newTokenPrice);
                       setMaxSupply(await getMaxSupply());
@@ -179,10 +211,26 @@ export default function SettingsTab() {
                       Toaster.success('The token details has been successfully set.');
                     } catch (error) {
                       Toaster.error(error?.reason ?? 'There was an error during execution.');
+                    } finally {
+                      setDetailWaiting(false);
                     }
                   }}
                 >
-                  Save
+                  {!detailWaiting && 'Save'}
+                  {detailWaiting && (
+                    <div>
+                      <SpinLoading
+                        size={20}
+                        count={10}
+                        barWidth={3}
+                        barHeight={5}
+                        borderRadius={1}
+                        fill="gray"
+                        className="align-middle mx-2"
+                      />
+                      Saving...
+                    </div>
+                  )}
                 </button>
               </div>
             </form>
@@ -205,9 +253,12 @@ export default function SettingsTab() {
                 <div className="btn-submit">
                   <button
                     className="w242"
+                    disabled={startWaiting}
                     onClick={async (e) => {
                       try {
                         e.preventDefault();
+
+                        setStartWaiting(true);
 
                         await startVault();
                         setStarted(await isStarted());
@@ -215,10 +266,26 @@ export default function SettingsTab() {
                         Toaster.success('The vault has been successfully started.');
                       } catch (error) {
                         Toaster.error(error?.reason ?? 'There was an error during execution.');
+                      } finally {
+                        setStartWaiting(true);
                       }
                     }}
                   >
-                    Start
+                    {!startWaiting && 'Start'}
+                    {startWaiting && (
+                      <div className="">
+                        <SpinLoading
+                          size={20}
+                          count={10}
+                          barWidth={3}
+                          barHeight={5}
+                          borderRadius={1}
+                          fill="gray"
+                          className="align-middle mx-2"
+                        />
+                        Starting...
+                      </div>
+                    )}
                   </button>
                 </div>
               )}

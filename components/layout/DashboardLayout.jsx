@@ -54,7 +54,7 @@ export default function DashboardLayout({ children }) {
         <div id="page" className={`market-page ${isMobileSidebar ? 'full' : ''}`}>
           <div id="market-header">
             <div className="market-header flex items-center justify-between">
-              <div style={{ fontSize: '16px', maxWidth: '110px' }} className="widget-search">
+              <div style={{ fontSize: '16px', maxWidth: '110px' }} className="widget-search" title="STF token price">
                 <div className="flex items-center">
                   <Image src="/assets/images/tokens/usdt.png" alt="USDT" width={24} height={24}></Image>
                   <span className="px-2">{price.toString()}</span>
