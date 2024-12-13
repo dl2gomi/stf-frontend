@@ -31,19 +31,29 @@ const hardhat = defineChain({
 createAppKit({
   adapters: [ethersAdapter],
   projectId,
-  networks: [hardhat, sepolia],
-  defaultNetwork: sepolia,
+  networks: [
+    process.env.NEXT_PUBLIC_ENV === 'Production'
+      ? mainnet
+      : process.env.NEXT_PUBLIC_ENV === 'Preview'
+      ? sepolia
+      : hardhat,
+  ],
+  defaultNetwork:
+    process.env.NEXT_PUBLIC_ENV === 'Production'
+      ? mainnet
+      : process.env.NEXT_PUBLIC_ENV === 'Preview'
+      ? sepolia
+      : hardhat,
   metadata: {
     name: 'Santistef',
     description: 'Santistef Investment Platform',
-    url: 'https://santistef.vercel.app',
-    icons: ['https://santistef.vercel.app/assets/icon/Favicon.png'],
+    url: process.env.NEXT_PUBLIC_URL,
+    icons: [`${process.env.NEXT_PUBLIC_URL}/assets/icon/Favicon.png`],
   },
   features: {
     email: false,
     socials: false,
     swaps: false,
-    history: false,
     onramp: false,
     analytics: false,
   },
