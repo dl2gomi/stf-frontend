@@ -134,7 +134,12 @@ export default function UserDashboard() {
           <div className="row">
             <div className="col-lg-6 flex items-center justify-center">
               {parseFloat(totalInvest) === 0 && (
-                <div style={{ fontSize: '48px', padding: '20px', color: 'yellow' }}>No investment yet</div>
+                <div className="text-center">
+                  <img src="/assets/images/invest.png" alt="no invest" style={{ height: '300px' }} />
+                  <div style={{ fontSize: '36px', padding: '0 10px 20px 10px', color: 'yellow', fontFamily: 'Arial' }}>
+                    No investment yet
+                  </div>
+                </div>
               )}
               {parseFloat(totalInvest) !== 0 && (
                 <div style={{ height: '500px', margin: 'auto' }} className="w-100 justify-center flex items-center">
