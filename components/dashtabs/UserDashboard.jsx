@@ -136,7 +136,15 @@ export default function UserDashboard() {
               {parseFloat(totalInvest) === 0 && (
                 <div className="text-center">
                   <img src="/assets/images/invest.png" alt="no invest" style={{ height: '300px' }} />
-                  <div style={{ fontSize: '36px', padding: '0 10px 20px 10px', color: 'yellow', fontFamily: 'Arial' }}>
+                  <div
+                    style={{
+                      fontSize: '36px',
+                      padding: '0 10px 20px 10px',
+                      marginTop: '-30px',
+                      color: 'yellow',
+                      fontFamily: 'Arial',
+                    }}
+                  >
                     No investment yet
                   </div>
                 </div>
