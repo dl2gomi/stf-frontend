@@ -55,7 +55,6 @@ createAppKit({
     socials: false,
     swaps: false,
     onramp: false,
-    analytics: false,
   },
 });
 
